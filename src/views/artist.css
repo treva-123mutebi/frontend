@@ -1,0 +1,113 @@
+.artist-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+  align-items: center;
+  flex-direction: column;
+  background-color: #0F0F0F;
+}
+.artist-container1 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.artist-container2 {
+  flex: 0 0 auto;
+  width: 100%;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.artist-container3 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.artist-text {
+  color: #ffffff;
+}
+.artist-container4 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.artist-image {
+  width: 200px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.artist-container5 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.artist-text1 {
+  color: #fbfbfb;
+}
+.artist-text2 {
+  color: #fbf8f8;
+}
+.artist-text3 {
+  color: #fbf8f8;
+}
+.artist-text4 {
+  color: #fbf8f8;
+}
+.artist-container6 {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.artist-text5 {
+  color: rgb(251, 251, 251);
+}
+.artist-text6 {
+  color: #fbf8f8;
+}
+.artist-text7 {
+  color: #fbf8f8;
+}
+.artist-text8 {
+  color: #fbf8f8;
+}
+.artist-section {
+  width: 100%;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  border-color: #51515A;
+  padding-left: var(--dl-space-space-oneandhalfunits);
+  padding-right: var(--dl-space-space-oneandhalfunits);
+  flex-direction: column;
+  justify-content: center;
+  border-bottom-width: 1px;
+}
+@media(max-width: 991px) {
+  .artist-section {
+    height: auto;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
