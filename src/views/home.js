@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 
@@ -6,20 +6,37 @@ import { Helmet } from 'react-helmet'
 
 import Navbar from '../components/navbar'
 import './home.css'
+import CustomCard from '../components/CustomCard';
 
 const Home = (props) => {
    const [searchText, setSearchText] = useState('');
+   const [data,setData] = useState([])
     const history = useHistory();
 
     const handleSearch = async () => {
         try {
             const response = await axios.get(`http://localhost:3000/api/track/${searchText}`);
-            const searchResults = response.data; 
+            const searchResults = response.data;
           console.log(searchResults);
         } catch (error) {
             console.error(error);
         }
     };
+    // fetchData fetches data from the fakestoreapi
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://fakestoreapi.com/products?limit=4");
+        setData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    useEffect(()=>{
+      fetchData()
+    },[]);
+
   return (
     <div className="home-container">
       <Helmet>
@@ -83,6 +100,20 @@ const Home = (props) => {
           </div>
           <div className="home-image5"></div>
         </div>
+      </section>
+      <section
+        style={{
+          background: "white",
+          height: "100vh",
+          width: "100vw",
+          padding: "2rem",
+          display:"flex",
+          flexWrap:"wrap",
+          justifyContent:"space-evenly"
+        }}
+      >
+        {data?.map((dta) =>   <CustomCard key={dta.id} title={dta.title}  source={dta.image} /> )}
+
       </section>
     </div>
   )
