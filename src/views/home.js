@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import axios from 'axios';
-
-import { Helmet } from 'react-helmet'
-
-import Navbar from '../components/navbar'
-import './home.css'
-import CustomCard from '../components/CustomCard';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { Helmet } from "react-helmet";
+import Navbar from "../components/navbar";
+import "./home.css";
+import CustomCard from "../components/CustomCard";
+import { useDataContext } from "../context/DataContext";
 
 const Home = (props) => {
-   const [searchText, setSearchText] = useState('');
-   const [data,setData] = useState([])
-    const history = useHistory();
+  const [searchText, setSearchText] = useState("");
+  // const history = useHistory();
 
-    const handleSearch = async () => {
-        try {
-            const response = await axios.get(`http://localhost:3000/api/track/${searchText}`);
-            const searchResults = response.data;
-          console.log(searchResults);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    // fetchData fetches data from the fakestoreapi
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("https://fakestoreapi.com/products?limit=4");
-        setData(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // const handleSearch = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:3000/api/track/${searchText}`
+  //     );
+  //     const searchResults = response.data;
+  //     console.log(searchResults);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-    useEffect(()=>{
-      fetchData()
-    },[]);
+  const { handleSearch } = useDataContext();
+
+  useEffect(() => {
+    handleSearch().then((handleSearch) => {
+      setSearchText(handleSearch);
+    });
+  });
+
+  const { fetchData } = useDataContext();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData().then((fetchedData) => {
+      setData(fetchedData); // Set the fetched data to the state
+    });
+  }, []);
 
   return (
     <div className="home-container">
@@ -59,7 +62,7 @@ const Home = (props) => {
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                 />
-                <div className="home-get-started button" >
+                <div className="home-get-started button">
                   <span className="home-text" onClick={handleSearch}>
                     <span>Search</span>
                     <br></br>
@@ -107,16 +110,17 @@ const Home = (props) => {
           height: "100vh",
           width: "100vw",
           padding: "2rem",
-          display:"flex",
-          flexWrap:"wrap",
-          justifyContent:"space-evenly"
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
         }}
       >
-        {data?.map((dta) =>   <CustomCard key={dta.id} title={dta.title}  source={dta.image} /> )}
-
+        {data?.map((dta) => (
+          <CustomCard key={dta.id} title={dta.title} source={dta.image} />
+        ))}
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
