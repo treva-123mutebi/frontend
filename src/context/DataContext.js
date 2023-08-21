@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
 
 const DataContext = createContext();
@@ -19,7 +19,7 @@ export const DataContextProvider = ({ children }) => {
       console.error(error);
     }
   };
-  
+
   // fetchData fetches data from the fakestoreapi
   const fetchData = async () => {
     try {

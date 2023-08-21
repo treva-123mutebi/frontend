@@ -8,20 +8,8 @@ import CustomCard from "../components/CustomCard";
 import { useDataContext } from "../context/DataContext";
 
 const Home = (props) => {
-  const [searchText, setSearchText] = useState("");
-  // const history = useHistory();
 
-  // const handleSearch = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:3000/api/track/${searchText}`
-  //     );
-  //     const searchResults = response.data;
-  //     console.log(searchResults);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const [searchText, setSearchText] = useState("");
 
   const { handleSearch } = useDataContext();
 
@@ -29,7 +17,8 @@ const Home = (props) => {
     handleSearch().then((handleSearch) => {
       setSearchText(handleSearch);
     });
-  });
+  }, []);
+
 
   const { fetchData } = useDataContext();
   const [data, setData] = useState([]);
